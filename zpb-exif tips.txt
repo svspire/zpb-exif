@@ -1,0 +1,27 @@
+zpb-exif tips.txt
+31-May-2016 SVS
+
+Don't use #'parse-exif-data. That function is only for compatibility
+with a similarly-named function in exifinfo.cl, and it doesn't
+return all the data that zpb-exif finds.
+
+Instead, in order to see everything that zpb-exif can find in an
+image file, do
+(zpb-exif:exif-alist (zpb-exif:make-exif <filename>))
+
+
+You may see "Unknown Tag #x8769" in the output. This is the EXIF-offset
+tag and it tells the offset of the exif IFD itself, which presumably
+zpb-exif deduces on its own. Thus it can safely be ignored.
+
+Good links to EXIF specs are at
+http://owl.phy.queensu.ca/~phil/exiftool/TagNames/index.html
+http://owl.phy.queensu.ca/~phil/exiftool/TagNames/EXIF.html
+http://www.cipa.jp/std/documents/e/DC-008-2012_E.pdf
+
+Note that after you process or edit an image with software tools, some
+or all of the exif tags may not be copied into the output. It's normal
+to find a lot more exif tags in the original camera image than in an
+output edited image. Some tools may copy some of the exif tags (like
+the DateTime tag, for example), but might not include all the camera-maker
+specific tags.
