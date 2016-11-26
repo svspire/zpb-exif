@@ -33,6 +33,7 @@
 
 (defpackage :zpb-exif
   (:use :cl)
+  (:nicknames :exif)
   (:export :make-exif
            ;; IFDs
            :image-ifd
